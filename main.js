@@ -1,6 +1,11 @@
 const tableBody = document.querySelector('#table-body');
 const btnAddParticipant = document.querySelector('#addParticipant');
+const participantModal = new bootstrap.Modal('#participantModal');
+const btnUpdateParticipant = document.querySelector('.js-button-update')
 
+const updateParticipant = () => {
+
+}
 
 const addParticipant = () => {
   const tableRow = document.createElement('tr');
@@ -25,12 +30,17 @@ const addParticipant = () => {
   tableDataActions.className = 'actions';
 
   const btnUpdate = document.createElement('button');
-  btnUpdate.className = 'btn btn-sm btn-warning';
+  btnUpdate.className = 'btn btn-sm btn-warning js-button-update';
   btnUpdate.innerText = 'Update';
+  btnUpdate.addEventListener('click', () => {
+    console.log('click');
+    participantModal.show();
+  });
 
   const btnRemove = document.createElement('button');
   btnRemove.className = 'btn btn-sm btn-danger ms-1';
   btnRemove.innerText = 'Remove';
+  btnRemove.addEventListener('click', () => tableRow.remove());
 
   tableDataActions.append(
     btnUpdate,
@@ -42,11 +52,18 @@ const addParticipant = () => {
     tableDataLastName,
     tableDataSkills,
     tableDataActions,
-    // btnUpdate,
-    // btnRemove
   );
 
   tableBody.appendChild(tableRow);
 }
 
-btnAddParticipant.addEventListener('click', addParticipant);
+btnAddParticipant.addEventListener('click', () => {
+  addParticipant();
+  participantModal.hide();
+}
+);
+
+// btnUpdateParticipant.addEventListener('click', () => {
+//   console.log('click');
+//   participantModal.show();
+// });
