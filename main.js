@@ -79,4 +79,7 @@ btnAddParticipant.addEventListener('click', (event) => {
 }
 );
 
+// fetch('https://jsonplaceholder.typicode.com/users')
+//   .then((response) => response.json())
+//   .then((participants) => participants.forEach(addParticipant));
 
