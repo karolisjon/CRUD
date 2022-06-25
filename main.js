@@ -1,20 +1,28 @@
 const tableBody = document.querySelector('#table-body');
-const btnAddParticipant = document.querySelector('#addParticipant');
-const participantModal = new bootstrap.Modal('#participantModal');
-const btnUpdateParticipant = document.querySelector('.js-button-update')
 
-const updateParticipant = () => {
+const btnAddParticipant = document.querySelector('#btn-add');
+const btnUpdateParticipant = document.querySelectorAll('.update-participant');
+const btnSaveUpdatedParticipant = document.querySelector('#update-participant');
 
-}
+const updateParticipantModal = new bootstrap.Modal('#participantModal')
+
+let firstName = document.querySelector('#first-name');
+let lastName = document.querySelector('#last-name');
+let skills = document.querySelector('#skills');
+
 
 const addParticipant = () => {
   const tableRow = document.createElement('tr');
 
-  const participantName = document.querySelector('#participantName').value;
-  const participantLastName = document.querySelector('#participantLastName').value;
-  const participantSkills = document.querySelector('#participantSkills').value;
+  const participantName = document.querySelector('#first-name').value;
+  const participantLastName = document.querySelector('#last-name').value;
+  const participantSkills = document.querySelector('#skills').value;
 
-  let tableDataFirstName = document.createElement('td');
+  let updateFirstName = document.querySelector('#update-first-name');
+  let updateLastName = document.querySelector('#update-last-name');
+  let updateSkills = document.querySelector('#update-skills');
+
+  const tableDataFirstName = document.createElement('td');
   tableDataFirstName.className = 'first-name';
   tableDataFirstName.innerText = participantName;
 
@@ -30,12 +38,10 @@ const addParticipant = () => {
   tableDataActions.className = 'actions';
 
   const btnUpdate = document.createElement('button');
-  btnUpdate.className = 'btn btn-sm btn-warning js-button-update';
+  btnUpdate.className = 'btn btn-sm btn-warning update-participant';
   btnUpdate.innerText = 'Update';
-  btnUpdate.addEventListener('click', () => {
-    console.log('click');
-    participantModal.show();
-  });
+  btnUpdate.setAttribute('data-bs-toggle', 'modal');
+  btnUpdate.setAttribute('data-bs-target', '#participantModal');
 
   const btnRemove = document.createElement('button');
   btnRemove.className = 'btn btn-sm btn-danger ms-1';
@@ -55,15 +61,22 @@ const addParticipant = () => {
   );
 
   tableBody.appendChild(tableRow);
+
+  btnSaveUpdatedParticipant.addEventListener('click', () => {
+    tableDataFirstName.innerText = updateFirstName.value;
+    tableDataLastName.innerText = updateLastName.value;
+    tableDataSkills.innerText = updateSkills.value;
+    updateParticipantModal.hide();
+  })
 }
 
-btnAddParticipant.addEventListener('click', () => {
+btnAddParticipant.addEventListener('click', (event) => {
+  event.preventDefault();
   addParticipant();
-  participantModal.hide();
+  firstName.value = '';
+  lastName.value = '';
+  skills.value = '';
 }
 );
 
-// btnUpdateParticipant.addEventListener('click', () => {
-//   console.log('click');
-//   participantModal.show();
-// });
+
